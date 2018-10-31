@@ -1,0 +1,108 @@
+"Bram Moolenaar <Bram@vim.org>\
+"Vincent 
+
+" Get the defaults that most users want.
+source $VIMRUNTIME/defaults.vim
+
+if has("vms")
+  set nobackup		" do not keep a backup file, use versions instead
+else
+  set backup		" keep a backup file (restore to previous version)
+  if has('persistent_undo')
+    set undofile	" keep an undo file (undo changes after closing)
+  endif
+endif
+
+if &t_Co > 2 || has("gui_running")
+  " Switch on highlighting the last used search pattern.
+  set hlsearch
+endif
+
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+
+  " Put these in an autocmd group, so that we can delete them easily.
+  augroup vimrcEx
+  au!
+
+  " For all text files set 'textwidth' to 78 characters.
+  autocmd FileType text setlocal textwidth=78
+
+  augroup END
+
+else
+
+  set autoindent		" always set autoindenting on
+
+endif " has("autocmd")
+
+" Add optional packages.
+"
+" The matchit plugin makes the % command work better, but it is not backwards
+" compatible.
+" The ! means the package won't be loaded right away but when plugins are
+" loaded during initialization.
+if has('syntax') && has('eval')
+  packadd! matchit
+endif
+
+
+"#################################################" 
+"@Vincent
+"set this 'VIMRUNTIME="${HOME}/.vim"' to the bashrc or zshrc startup shell
+"##################################################" 
+
+"##################################################" GENERAL
+syntax on
+filetype plugin indent on
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set background=dark
+set vb
+set t_vb=
+"set nu
+colorscheme desert
+highlight Normal ctermbg=NONE
+
+"##################################################" HOTKEYS
+"if set paste, it will disable filetype indent on
+"set paste
+"set auto brace completion
+inoremap {<CR>  {<CR>}<Esc>O 
+inoremap [<Space>  []<Left>               
+inoremap ~~ <Esc>50i#<Esc>i<End><Space>
+inoremap !! <Esc>:SyntasticCheck<CR>
+inoremap @@ <Esc>:w!<CR>
+
+"################################################## SYNTASTIC
+" https://github.com/vim-syntastic/syntastic/blob/master/doc/syntastic.txt
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+"turn on/off options, ref manual
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_aggregate_errors = 0
+let g:syntastic_debug = 0
+let g:syntastic_debug_file = "~/syntastic.log"
+let g:syntastic_py_checkers = ["pylint"]
+let g:syntastic_c_checkers = ["gcc"]
+let g:syntastic_cpp_checkers = ["gcc"]
+let g:syntastic_puppet_checkers = ["puppet"]
+let g:syntastic_sh_checkers = ["sh"]
+let g:syntastic_go_checkers = ["go"]
+
+"disable warning message from checkers, ex space..
+let g:syntastic_quiet_messages = { "level": "warnings" }
+"active: check on saved/open as defined above .._check_on_open|.._wq, 
+"passive: only if call SyntasticCheck
+let g:syntastic_mode_map = {
+        \ "mode": "active",
+        \ "active_filetypes": ["python", "cpp"],
+        \ "passive_filetypes": ["puppet"] }
+
+"################################################## 

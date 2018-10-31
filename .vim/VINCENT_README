@@ -1,0 +1,7 @@
+Goal: to combine the syntax checker (VIM) and the LANGUAGE SYNTAX CHECKER all in one. 
+Also working independent with the /usr/share/lib from neither centos nor debian
+
+#Copy the library of vim to the home/.vim foler
+#Merged the syntastic files into the .vim : autoload, plugin , etc...
+#keep the backup folder exist for everytime merging the file into .vim ..so ignore such like autoload-syntastic
+# moving vimrc-Vincent to .vimrc to $HOME and edit .bashrc .vimrc as approriately

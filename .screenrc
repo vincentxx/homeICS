@@ -1,0 +1,26 @@
+## @Vincent Development Environment Setup Package
+startup_message off
+deflogin off
+
+#to make xterm color as standard across centos, ubuntu
+#Enable this allow zsh to run screen plugin which show the screen status of the ssh host logged in
+#but then the xterm is failed to recogized the term when running from my home ubuntu desktop, need to find solution because ubuntu 
+# has newer version which using screen.xterm-256color
+#term xterm-256color
+
+
+
+#screen -t Shell 0 bash
+#screen -t Emacs 1 /usr/bin/emacs -nw
+select 0
+#vbell on
+#change the hardstatus settings to give an window list at the bottom of the
+#screen, with the time and date and with the current window highlighted
+hardstatus alwayslastline
+#hardstatus string '%{= mK}%-Lw%{= KW}%50>%n%f* %t%{= mK}%+Lw%< %{= kG}'
+#hardstatus string '%{= kG}%-Lw%{= kW}%50> %n%f* %t%{= kG}%+Lw%< %{= kG}'
+#hardstatus string "%{= ky}%-Lw%{=r}%20>%n %t%{= ky}%+Lw %{= ky}%-=| %{= kw}%M%d %c%{-} %{=r} ${USER}@%H "
+hardstatus string "%{= ky}%-Lw%{=r}%20>%n %t%{= ky}%+Lw %{= ky}%-=| %{= kw}%M%d %c%{-} %{=r} ${USER}@%H "
+multiuser on
+aclchg :window: +x select
+height -w 100
